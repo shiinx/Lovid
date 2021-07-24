@@ -8,6 +8,7 @@ public enum ObjectType {
     epd = 2
 }
 
+
 [Serializable]
 public class ObjectPoolItem {
     public int amount;

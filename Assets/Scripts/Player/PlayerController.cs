@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         // TODO: Any other Boss attack
-        // TODO: Switch to OnTriggerStay2D with Invulnerability Frame system 
         if (other.CompareTag("BossBullet")) {
             health.Value -= bossConstants.rangeDamage;
             onPlayerTakeDamage.Invoke();
@@ -52,8 +51,10 @@ public class PlayerController : MonoBehaviour {
             onPlayerTakeDamage.Invoke();
         }
 
+
         if (health.Value <= 0) {
             onPlayerDeath.Invoke();
+            Time.timeScale = 0;
         }
     }
 }

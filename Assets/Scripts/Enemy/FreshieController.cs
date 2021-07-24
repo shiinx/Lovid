@@ -1,21 +1,20 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 public class FreshieController : MonoBehaviour, EnemyInterface {
     public EnemyConstants enemyConstants;
     public PlayerConstants playerConstants;
     public TurretConstants turretConstants;
-    public FloatVariable freshieX;
-    public FloatVariable freshieY;
-    public FloatVariable freshieYIntercept;
-
+    public PathVariable freshiePath;
+    public UnityEvent onEnemyTakeDamage;
+    public UnityEvent onEnemyDeath;
+    public FloatVariable freshieHealth;
+    private float pathY;
     private Rigidbody2D enemyBody;
     private Vector2 freshieVelocity;
     // Start is called before the first frame update
     private void Start() {
+        freshieHealth.Value = enemyConstants.freshieHealth;
         enemyBody = GetComponent<Rigidbody2D>();
-        freshieY.Value = enemyConstants.freshieGradient;
-        freshieX.Value = enemyConstants.freshieSpdX;
-        freshieYIntercept.Value = enemyConstants.freshieYIntercept;
     }
 
     // Update is called once per frame
@@ -26,10 +25,22 @@ public class FreshieController : MonoBehaviour, EnemyInterface {
     }
     public void ComputeVelocity()
     {
-        //retrieve values from floatvariables and enemyconstant
+        //retrieve values from pathvariables
         //say moving according to a math function, y = mx+c
-        //epdVelocity = new Vector2(stepValueX, m*stepValueX+c)
-        freshieVelocity = new Vector2(freshieX.Value, freshieY.Value * freshieX.Value + freshieYIntercept.Value);
+        //if freshiePath.pathType is linear, freshieVelocity = new Vector(x, m)
+        // if sine (y=sinx), y = sin(x); freshieVelocity = new Vector(stepvalue, y); x += stepvalue
+        //x += stepvalue
+        if (freshiePath.pathType == EnemyConstants.PathType.linear)
+        {
+            freshieVelocity = new Vector2(freshiePath.xStepValue, freshiePath.yTransform);
+        }
+        if (freshiePath.pathType == EnemyConstants.PathType.sine)
+        {
+            pathY = freshiePath.yTransform * Mathf.Sin(freshiePath.xTransform);
+            freshieVelocity = new Vector2(freshiePath.xStepValue, pathY);
+            freshiePath.XTransform += freshiePath.xStepValue;
+        }
+        
     }
     public void MoveEnemy()
     {
@@ -41,31 +52,26 @@ public class FreshieController : MonoBehaviour, EnemyInterface {
         if (other.gameObject.tag == "Bullet") TakeBulletDamage();
         if (other.gameObject.tag == "TurretBullet") TakeTurretDamage();
         if (other.gameObject.tag == "Claymore") TakeClaymoreDamage();
-    }
-
-    public void TakeBulletDamage()
-    {
-        enemyConstants.freshieHealth -= playerConstants.rangeDamage;
         if(enemyConstants.freshieHealth <= 0)
         {
             KillSelf();
+            onEnemyDeath.Invoke();
         }
+    }
+    public void TakeBulletDamage()
+    {
+        freshieHealth.Value -= playerConstants.rangeDamage;
+        onEnemyTakeDamage.Invoke();
     }
     public void TakeTurretDamage()
     {
-        enemyConstants.freshieHealth -= turretConstants.attackTurretDamage;
-        if(enemyConstants.freshieHealth <= 0)
-        {
-            KillSelf();
-        }
+        freshieHealth.Value -= turretConstants.attackTurretDamage;
+        onEnemyTakeDamage.Invoke();
     }
     public void TakeClaymoreDamage()
     {
-        enemyConstants.freshieHealth -= turretConstants.bombTurretDamage;
-        if(enemyConstants.freshieHealth <= 0)
-        {
-            KillSelf();
-        }
+        freshieHealth.Value -= turretConstants.bombTurretDamage;
+        onEnemyTakeDamage.Invoke();
     }
     public void KillSelf()
     {

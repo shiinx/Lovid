@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c0bf39ff234c33b69515986c0b1b42, type: 3}
-  m_Name: EpdX
+  m_Script: {fileID: 11500000, guid: 1e27579432446c54fbae8cbeb51f894c, type: 3}
+  m_Name: ISTDPath
   m_EditorClassIdentifier: 
-  value: 0
+  yTransform: 1
+  xTransform: 1
+  xStepValue: 1
+  pathType: 1
