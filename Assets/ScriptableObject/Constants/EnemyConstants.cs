@@ -2,10 +2,6 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyConstants", menuName = "ScriptableObjects/Constants/EnemyConstants")]
 public class EnemyConstants : ScriptableObject {
-    public enum PathType {
-        linear = 0,
-        sine = 1
-    }
     //for enemy
     public float freshieHealth = 2.0f;
     public float freshieTouchDamage = 2.0f;

@@ -1,22 +1,22 @@
 using UnityEngine;
-using UnityEngine.Events;
+
 public class ISTDController : MonoBehaviour, EnemyInterface {
     public EnemyConstants enemyConstants;
     public PlayerConstants playerConstants;
     public TurretConstants turretConstants;
-    public PathVariable istdPath;
-    public UnityEvent onEnemyTakeDamage;
-    public UnityEvent onEnemyDeath;
-    public FloatVariable istdHealth;
+    public FloatVariable istdX;
+    public FloatVariable istdY;
+    public FloatVariable istdYIntercept;
 
-    private float pathY;
     private Rigidbody2D enemyBody;
     private Vector2 istdVelocity;
 
     // Start is called before the first frame update
     private void Start() {
-        istdHealth.Value = enemyConstants.istdHealth;
         enemyBody = GetComponent<Rigidbody2D>();
+        istdY.Value = enemyConstants.istdGradient;
+        istdX.Value = enemyConstants.istdSpdX;
+        istdYIntercept.Value = enemyConstants.istdYIntercept;
     }
 
     // Update is called once per frame
@@ -27,22 +27,10 @@ public class ISTDController : MonoBehaviour, EnemyInterface {
     }
     public void ComputeVelocity()
     {
-        //retrieve values from pathvariables
+        //retrieve values from floatvariables and enemyconstant
         //say moving according to a math function, y = mx+c
-        //if istdPath.pathType is linear, istdVelocity = new Vector(x, m)
-        // if sine (y=sinx), y = sin(x); istdVelocity = new Vector(stepvalue, y); x += stepvalue
-        //x += stepvalue
-        if (istdPath.pathType == EnemyConstants.PathType.linear)
-        {
-            istdVelocity = new Vector2(istdPath.xStepValue, istdPath.yTransform);
-        }
-        if (istdPath.pathType == EnemyConstants.PathType.sine)
-        {
-            pathY = istdPath.yTransform * Mathf.Sin(istdPath.xTransform);
-            istdVelocity = new Vector2(istdPath.xStepValue, pathY);
-            istdPath.XTransform += istdPath.xStepValue;
-        }
-        
+        //epdVelocity = new Vector2(stepValueX, m*stepValueX+c)
+        istdVelocity = new Vector2(istdX.Value, istdY.Value * istdX.Value + istdYIntercept.Value);
     }
     public void MoveEnemy()
     {
@@ -54,26 +42,31 @@ public class ISTDController : MonoBehaviour, EnemyInterface {
         if (other.gameObject.tag == "Bullet") TakeBulletDamage();
         if (other.gameObject.tag == "TurretBullet") TakeTurretDamage();
         if (other.gameObject.tag == "Claymore") TakeClaymoreDamage();
+    }
+
+    public void TakeBulletDamage()
+    {
+        enemyConstants.istdHealth -= playerConstants.rangeDamage;
         if(enemyConstants.istdHealth <= 0)
         {
             KillSelf();
-            onEnemyDeath.Invoke();
         }
-    }
-    public void TakeBulletDamage()
-    {
-        istdHealth.Value -= playerConstants.rangeDamage;
-        onEnemyTakeDamage.Invoke();
     }
     public void TakeTurretDamage()
     {
-        istdHealth.Value -= turretConstants.attackTurretDamage;
-        onEnemyTakeDamage.Invoke();
+        enemyConstants.istdHealth -= turretConstants.attackTurretDamage;
+        if(enemyConstants.istdHealth <= 0)
+        {
+            KillSelf();
+        }
     }
     public void TakeClaymoreDamage()
     {
-        istdHealth.Value -= turretConstants.bombTurretDamage;
-        onEnemyTakeDamage.Invoke();
+        enemyConstants.istdHealth -= turretConstants.bombTurretDamage;
+        if(enemyConstants.istdHealth <= 0)
+        {
+            KillSelf();
+        }
     }
     public void KillSelf()
     {

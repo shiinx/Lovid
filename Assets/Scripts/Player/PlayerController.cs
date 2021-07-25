@@ -12,14 +12,14 @@ public class PlayerController : MonoBehaviour {
 
     public UnityEvent onPlayerDeath;
     public UnityEvent onPlayerTakeDamage;
-
+    
     private void Start() {
         health.Value = playerConstants.maxHealth;
         buildLimit.Value = 0;
         equipped.Value = PlayerConstants.Primary.Gun;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         // TODO: Any other Boss attack
         if (other.CompareTag("BossBullet")) {
             health.Value -= bossConstants.rangeDamage;
@@ -50,11 +50,12 @@ public class PlayerController : MonoBehaviour {
             health.Value -= enemyConstants.freshieTouchDamage;
             onPlayerTakeDamage.Invoke();
         }
-
+            
 
         if (health.Value <= 0) {
             onPlayerDeath.Invoke();
             Time.timeScale = 0;
         }
     }
+    
 }

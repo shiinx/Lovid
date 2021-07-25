@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System;
+using System.Collections.Generic;
 public enum TurretType {
     attack = 0,
     defence = 1
@@ -59,7 +60,8 @@ public class TurretHealthManager : MonoBehaviour {
 
         if (other.gameObject.tag == "Boss") currentHP -= bossConstants.touchDamage / 50;
 
-
+        Debug.Log(currentHP) ; 
+        Debug.Log("hello") ; 
         if (currentHP <= 0) killself();
     }
 

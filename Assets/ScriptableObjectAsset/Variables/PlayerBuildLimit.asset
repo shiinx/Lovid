@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bde233f6cc14b54b0b27e7c6e871ebd, type: 3}
   m_Name: PlayerBuildLimit
   m_EditorClassIdentifier: 
-  value: 16
+  value: 0

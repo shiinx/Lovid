@@ -7,6 +7,7 @@ public class TurretConstants : ScriptableObject {
     public float bulletForce = 100f;
     public float attackTurretHealth = 10.0f;
     public int attackTurretBuildCost = 10;
+    public float attackTurretDelay = 0.2f ;
     public float attackTurretMarginSpace;
 
     public float defenseTurretHealth = 15.0f;

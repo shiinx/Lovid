@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour {
     public TurretConstants turretConstants;
     public LevelConstants levelConstants;
     public UnityEvent onPlayerBuild;
-    public UnityEvent onPlayerEquipChange;
     private Camera _camera;
 
     private Transform _marioTransform;
@@ -29,8 +28,9 @@ public class InputController : MonoBehaviour {
     // Update is called once per frame
     private void Update() {
         HotKeyHandler();
-        Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+
         if (Input.GetMouseButtonDown(0)) {
+            Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             var currentEq = equipped.Value;
             if (currentEq == PlayerConstants.Primary.Gun) {
                 Shoot(mousePosition);
@@ -39,10 +39,10 @@ public class InputController : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && IsNearToPlayer(mousePosition)) {
-            var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        if (Input.GetMouseButtonDown(1)) {
+            var hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit) {
-                var obj = hit.transform.root.gameObject;
+                var obj = hit.transform.gameObject;
                 DestroyObj(obj);
             }
         }
@@ -126,39 +126,27 @@ public class InputController : MonoBehaviour {
             default:
                 throw new ArgumentOutOfRangeException(nameof(currentEq), currentEq, null);
         }
-
         onPlayerBuild.Invoke();
     }
 
     private void HotKeyHandler() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
             equipped.Value = PlayerConstants.Primary.Gun;
-            onPlayerEquipChange.Invoke();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
             equipped.Value = PlayerConstants.Primary.Platform;
-            onPlayerEquipChange.Invoke();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
             equipped.Value = PlayerConstants.Primary.AttackTurret;
-            onPlayerEquipChange.Invoke();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+        if (Input.GetKeyDown(KeyCode.Alpha4))
             equipped.Value = PlayerConstants.Primary.BombTurret;
-            onPlayerEquipChange.Invoke();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5)) {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
             equipped.Value = PlayerConstants.Primary.DefenseTurret;
-            onPlayerEquipChange.Invoke();
-        }
     }
 
     private void DestroyObj(GameObject obj) {
-        print(obj.tag);
         switch (obj.tag) {
             case "Platform": {
                 var buildCost = playerConstants.platformBuildCost;
@@ -170,17 +158,16 @@ public class InputController : MonoBehaviour {
                 buildLimit.Value -= buildCost;
                 break;
             }
-            case "BombTurret": {
-                var buildCost = turretConstants.bombTurretBuildCost;
-                buildLimit.Value -= buildCost;
-                break;
-            }
             case "DefenseTurret": {
                 var buildCost = turretConstants.defenseTurretBuildCost;
                 buildLimit.Value -= buildCost;
                 break;
             }
-
+            case "BombTurret": {
+                var buildCost = turretConstants.bombTurretBuildCost;
+                buildLimit.Value -= buildCost;
+                break;
+            }
             default: {
                 return;
             }

@@ -4,24 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Boss
+  - AttackTurret
   - Platform
-  - Ground
-  - EPDField
+  - Projectile
   - ISTD
+  - BombTurret
+  - Ground
+  - DefenseTurret
+  - PlayerBullet
   - Freshie
   - EPD
-  - PlayerAttack
+  - EPDField
   - TurretBullet
-  - Claymore
-  - Turret
-  - PlayerBullet
   - BossBullet
-  - Boss
-  - Projectile
-  - Enemy
-  - AttackTurret
-  - DefenseTurret
-  - BombTurret
   layers:
   - Default
   - TransparentFX
@@ -29,8 +25,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Background
+  - Bullet
   - 
   - 
   - 

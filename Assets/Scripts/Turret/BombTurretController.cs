@@ -1,5 +1,7 @@
-using System.Collections;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Collections;
 
 
 // when enemies enter the bomb collision area, they should register themselves into the event 
@@ -7,9 +9,10 @@ public class BombTurretController : MonoBehaviour {
     public delegate void gameEvent();
 
     // Start is called before the first frame update
-    public float diffuseTime = 1.0f;
+    public float diffuseTime = 0.5f;
     public float explodeRaidus;
 
+    public List<EnemyType> hittableEnemeies ; 
     private bool active;
     private AudioSource bombAudioSource;
 
@@ -20,22 +23,18 @@ public class BombTurretController : MonoBehaviour {
     // Update is called once per frame
     private void Update() { }
 
-    // void OnTriggerEnter2D(Collider2D other){
-    //     if (other.gameObject.tag =="Enemy"){
-    //         if (!active) {
-    //             active = true ; 
-    //             // increase collider radius
-    //             //GetComponent<CircleCollider2D>().radius = Time.time * .01f;
-    //             GetComponent<CircleCollider2D>().radius = explodeRaidus ; 
-    //             // add object
+    private bool enemyDetected(Collider2D other){
+        for (int i = 0 ; i < hittableEnemeies.Count; i++) {
+            if (other.gameObject.tag == hittableEnemeies[i].ToString()){
+                return true ; 
+            }
+        }
 
-    //         }
-    //     }
-    // }
+        return false ; 
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("collision detected");
-        if (other.gameObject.tag == "Enemy")
+        if (enemyDetected(other))
             if (!active) {
                 active = true;
                 GetComponent<CircleCollider2D>().radius = explodeRaidus;

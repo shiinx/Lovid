@@ -45,7 +45,6 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -124,8 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a675ff0dcc20d43be42b6cb9ba9878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffuseTime: 1.24
+  diffuseTime: 0.5
   explodeRaidus: 4.09
+  enemytypes: 00000000010000000200000003000000
 --- !u!58 &346517350023066486
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f8f0ec66d3f6a468bfe95760ef11a2, type: 3}
   m_Name: PlayerConstants
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 500
   rangeDamage: 5
   speed: 100
   upSpeed: 50
@@ -20,7 +20,6 @@ MonoBehaviour:
   linearDrag: 10
   bulletForce: 50
   constructDistance: 3.09
-  equipped: 0
   initNumberOfPlayerLife: 3
   platformBuildCost: 2
   platformMarginSpace: 1

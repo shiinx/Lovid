@@ -19,7 +19,7 @@ public class PlayerConstants : ScriptableObject {
     public float linearDrag = 10f;
     public float bulletForce = 100f;
     public float constructDistance;
-    public int iFrameSeconds = 3;
+    public int initNumberOfPlayerLife = 3;
     
     public int platformBuildCost = 2;
     public float platformMarginSpace;
