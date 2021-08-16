@@ -6,31 +6,44 @@ public class EnemyConstants : ScriptableObject {
         linear = 0,
         sine = 1
     }
-    //for enemy
+    //freshie
     public float freshieHealth = 2.0f;
-    public float freshieTouchDamage = 2.0f;
-    public float freshieSpdX = -1.0f;
-    public float freshieGradient = 0.0f;
-    public float freshieYIntercept = 0.0f;
-    
+    public float freshieTouchDamage = 2.0f;    
+    public float freshieCurrencyValue = 1.0f ; 
+    // vairant 
+    public float freshieVariantHealth = 4.0f ; 
+    public float freshieVariantTouchDamage = 4.0f ; 
+    public float confuseDebuffTime = 10.0f ; 
+    public float freshieVairantCurrencyValue = 2.0f ; 
+
+
+    // istd 
     public float istdHealth = 3.0f;
     public float istdTouchDamage = 4.0f;
-    public float istdSpdX = -1.0f;
-    public float istdGradient = 0.0f;
-    public float istdYIntercept = 0.0f;
+    public float istdCurrencyValue = 2.0f ; 
+    // istd-variant 
+    public float istdVariantHelath = 6.0f ; 
+    public float istdVariantTouchDamage = 8.0f ; 
+    public float istdVairantCurrencyValue = 4.0f ; 
+    public float shootingDebuffTime = 10.0f ; 
 
+
+    // epd 
     public float epdHealth = 5.0f;
     public float epdTouchDamage = 2.0f;
     public float epdSkillDamage = 1.0f;
-    public float epdSpdX = -1.0f;
-    public float epdGradient = 0.0f;
-    public float epdYIntercept = 0.0f;
+    public float epdCurrencyValue = 3.0f ; 
+    // epd-variant 
+    public float epdVariantHealth = 10.0f ; 
+    public float epdVariantTouchDamage = 5.0f ; 
+    public float epdVariantSkillDamage = 3.0f ; 
+    public float epdVairantCurrencyValue = 6.0f ; 
+    public float turretDebuffTime = 10.0f ; 
+    public float silenceDebuffTime= 10.0f ; 
 
-    public float enemyPatrolTime = 2.0f;
-    
-    public float groundSurface = -4.5f;
+
+
+    // some random thing 
     public float groundDistance = -4.5f;
 
-    // for Reset values
-    private Vector3 freshieSpawnPointStart = new Vector3(10.0f, -3.5f, 0); // hardcoded location
 }

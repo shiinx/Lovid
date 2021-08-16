@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e27579432446c54fbae8cbeb51f894c, type: 3}
   m_Name: EPDPath
   m_EditorClassIdentifier: 
-  yTransform: 1
-  xTransform: 1
+  yTransform: 0
+  xTransform: 0
   xStepValue: 1
-  pathType: 1
+  pathType: 0

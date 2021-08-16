@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(fileName = "FloatVariable", menuName = "ScriptableObjects/Variables/PathVariable", order = 5)]
+[CreateAssetMenu(fileName = "PathVariable", menuName = "ScriptableObjects/Variables/PathVariable", order = 5)]
 public class PathVariable : ScriptableObject
 {
     public float yTransform;

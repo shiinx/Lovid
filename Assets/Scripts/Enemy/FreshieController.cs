@@ -1,81 +1,95 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
+
 public class FreshieController : MonoBehaviour, EnemyInterface {
+    public bool variant = false;
+    public ObjectPointer flagPointer;
     public EnemyConstants enemyConstants;
-    public PlayerConstants playerConstants;
+    public PlayerVariable playerVariable;
     public TurretConstants turretConstants;
-    public PathVariable freshiePath;
-    public UnityEvent onEnemyTakeDamage;
+    public GameObject coin;
+    
     public UnityEvent onEnemyDeath;
-    public FloatVariable freshieHealth;
-    private float pathY;
-    private Rigidbody2D enemyBody;
+
+    NavMeshAgent agent;
     private Vector2 freshieVelocity;
+
+    //public FloatVariable freshieHealth;
+    private float health;
+    private bool _isDead;
+
     // Start is called before the first frame update
     private void Start() {
-        freshieHealth.Value = enemyConstants.freshieHealth;
-        enemyBody = GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        if (!variant) {
+            health = enemyConstants.freshieHealth;
+        } else {
+            // increase  or decrease here iagent speed if required 
+            health = enemyConstants.freshieVariantHealth;
+        }
     }
 
     // Update is called once per frame
     private void Update() {
-        //compute velocity using floatvariables, enemyconstants
-        //move the enemybody accordingly
-        MoveEnemy();
-    }
-    public void ComputeVelocity()
-    {
-        //retrieve values from pathvariables
-        //say moving according to a math function, y = mx+c
-        //if freshiePath.pathType is linear, freshieVelocity = new Vector(x, m)
-        // if sine (y=sinx), y = sin(x); freshieVelocity = new Vector(stepvalue, y); x += stepvalue
-        //x += stepvalue
-        if (freshiePath.pathType == EnemyConstants.PathType.linear)
-        {
-            freshieVelocity = new Vector2(freshiePath.xStepValue, freshiePath.yTransform);
+        agent.destination = flagPointer.flagTransform.position; //waypoint.transform.position;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        
+        if (agent.velocity.x < 0 && !variant) {
+            transform.localScale = new Vector3(-0.4f, 0.4f, 1);
+        } else if (agent.velocity.x > 0 && !variant){
+            transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        } else if (agent.velocity.x < 0 && variant) {
+            transform.localScale = new Vector3(-0.6f, 0.6f, 1);
+        } else if (agent.velocity.x > 0 && variant) {
+            transform.localScale = new Vector3(0.6f, 0.6f, 1);
         }
-        if (freshiePath.pathType == EnemyConstants.PathType.sine)
-        {
-            pathY = freshiePath.yTransform * Mathf.Sin(freshiePath.xTransform);
-            freshieVelocity = new Vector2(freshiePath.xStepValue, pathY);
-            freshiePath.XTransform += freshiePath.xStepValue;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("PlayerBullet")) {
+            Destroy(other.gameObject);
+            TakeBulletDamage();
+        }
+
+        if (other.gameObject.CompareTag("TurretBullet")) {
+            Destroy(other.gameObject);
+            TakeTurretDamage();
+        }
+
+        if (other.gameObject.CompareTag("BombTurret")) {
+            TakeClaymoreDamage();
         }
         
-    }
-    public void MoveEnemy()
-    {
-        //compute velocity
-        ComputeVelocity();
-        enemyBody.MovePosition(enemyBody.position + freshieVelocity*Time.fixedDeltaTime);
-    }
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "Bullet") TakeBulletDamage();
-        if (other.gameObject.tag == "TurretBullet") TakeTurretDamage();
-        if (other.gameObject.tag == "Claymore") TakeClaymoreDamage();
-        if(enemyConstants.freshieHealth <= 0)
-        {
-            KillSelf();
+        if (health <= 0 && !_isDead) {
+            _isDead = true;
             onEnemyDeath.Invoke();
+            KillSelf();
         }
     }
-    public void TakeBulletDamage()
-    {
-        freshieHealth.Value -= playerConstants.rangeDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeBulletDamage() {
+        health -= playerVariable.PlayerRangeDamage;
     }
-    public void TakeTurretDamage()
-    {
-        freshieHealth.Value -= turretConstants.attackTurretDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeTurretDamage() {
+        health -= turretConstants.attackTurretDamage;
     }
-    public void TakeClaymoreDamage()
-    {
-        freshieHealth.Value -= turretConstants.bombTurretDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeClaymoreDamage() {
+        health -= turretConstants.bombTurretDamage;
     }
-    public void KillSelf()
-    {
-        this.gameObject.SetActive(false);
-        Debug.Log("Enemy returned to pool");
+
+    public void KillSelf() {
+        float n = variant ? enemyConstants.freshieVairantCurrencyValue : enemyConstants.freshieCurrencyValue;
+        for (int i = 0; i < (int) n; i++) {
+            Instantiate(coin, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 }

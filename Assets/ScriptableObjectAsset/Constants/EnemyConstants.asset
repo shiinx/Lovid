@@ -12,4 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d18068e4370e0a42a61a15be1275b92, type: 3}
   m_Name: EnemyConstants
   m_EditorClassIdentifier: 
-  EnemyCP: 1
+  freshieHealth: 3
+  freshieTouchDamage: 1
+  freshieCurrencyValue: 1
+  freshieVariantHealth: 9
+  freshieVariantTouchDamage: 2
+  confuseDebuffTime: 10
+  freshieVairantCurrencyValue: 3
+  istdHealth: 12
+  istdTouchDamage: 3
+  istdCurrencyValue: 4
+  istdVariantHelath: 24
+  istdVariantTouchDamage: 6
+  istdVairantCurrencyValue: 8
+  shootingDebuffTime: 10
+  epdHealth: 9
+  epdTouchDamage: 6
+  epdSkillDamage: 3
+  epdCurrencyValue: 4
+  epdVariantHealth: 18
+  epdVariantTouchDamage: 12
+  epdVariantSkillDamage: 6
+  epdVairantCurrencyValue: 8
+  turretDebuffTime: 10
+  silenceDebuffTime: 10
+  groundDistance: -4.5

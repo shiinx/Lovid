@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System;
+using System.Collections.Generic;
 public enum TurretType {
     attack = 0,
     defence = 1
@@ -15,11 +16,16 @@ public class TurretHealthManager : MonoBehaviour {
     private float currentHP;
     private float maxHP;
 
+    private AudioSource DefenceAudioSource ; 
+
     private void Start() {
         if (turretType == TurretType.attack)
             currentHP = turretConstants.attackTurretHealth;
         else if (turretType == TurretType.defence) currentHP = turretConstants.defenseTurretHealth;
         maxHP = currentHP;
+        DefenceAudioSource = GetComponent<AudioSource>() ; 
+
+        
     }
 
     // Update is called once per frame
@@ -36,30 +42,37 @@ public class TurretHealthManager : MonoBehaviour {
 
     // implementing touch damage
     private void OnTriggerStay2D(Collider2D other) {
-        // needs to be updated based on enemy type 
-        // if (other.gameObject.tag == "Enemy") {
-        //     // check for enemy type
-
-        //     Debug.Log("Collision ");
-        //     // take damage 
-        //     currentHP -= enemyConstants.EnemyCP / 50;
-        //     Debug.Log(currentHP);
-        //     // check if health reached zero 
-
-        //     // if health is zero, kill self 
-        // }
 
         // freshie , ISTD , EPD, boss, bossbullet, 
 
         if (other.gameObject.tag == "Freshie") currentHP -= enemyConstants.freshieTouchDamage / 50;
 
+        if (other.gameObject.tag == "FreshieVariant") currentHP -= enemyConstants.freshieVariantTouchDamage / 50;
+
         if (other.gameObject.tag == "ISTD") currentHP -= enemyConstants.istdTouchDamage / 50;
+
+        if (other.gameObject.tag == "ISTDVariant") currentHP -= enemyConstants.freshieTouchDamage / 50;
 
         if (other.gameObject.tag == "EPD") currentHP -= enemyConstants.epdTouchDamage / 50;
 
-        if (other.gameObject.tag == "Boss") currentHP -= bossConstants.touchDamage / 50;
+        if (other.gameObject.tag == "EPDVariant") currentHP -= enemyConstants.epdVariantTouchDamage / 50;
+        
+        if (other.gameObject.tag == "EPDField") currentHP -= enemyConstants.epdSkillDamage/ 50; 
+
+        if (other.gameObject.tag == "EPDFieldVariant") currentHP -= enemyConstants.epdVariantSkillDamage/ 50;
+
+        if (other.gameObject.tag == "Boss") currentHP -= bossConstants.touchDamage / 50; 
+
+        if (other.gameObject.tag == "BossBullet") currentHP -= bossConstants.rangeDamage / 50; 
 
 
+
+        
+
+        if (DefenceAudioSource) DefenceAudioSource.Play() ; 
+
+        // Debug.Log(currentHP) ; 
+        // Debug.Log("hello") ; 
         if (currentHP <= 0) killself();
     }
 

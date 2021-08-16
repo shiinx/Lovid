@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5440668679859049541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5440668679859049563}
+  - component: {fileID: 5440668679859049562}
+  m_Layer: 0
+  m_Name: WavePooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5440668679859049563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440668679859049541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.38308853, y: -0.63627905, z: -2.3754675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5440668679859049562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440668679859049541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f11695e08595a4791aa323e6d0eca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomSpawn: {fileID: 11400000, guid: 6a67ea3b794fd21478acefb4db1c1e29, type: 2}
+  leftSpawn: {fileID: 11400000, guid: 6eabb886c402b3a4eb2132db06a354ea, type: 2}
+  rightSpawn: {fileID: 11400000, guid: 95d82e9bf35bc634bad26bd4fb6230c2, type: 2}
+  freshiePrefab: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+  istdPrefab: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+  epdPrefab: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+  currentGameState: {fileID: 11400000, guid: e01b56369fda91f49be60da56e322d8b, type: 2}
+  wavesToPool:
+  - waveConstant: {fileID: 11400000, guid: fd88b69b741a4c94d996c252424f7b37, type: 2}
+    waveState: {fileID: 11400000, guid: c46220995df49484eb2097bc9ac46f13, type: 2}
+    spawned: 0
+  - waveConstant: {fileID: 11400000, guid: d17e09bbf1f1df54ab2eb61e186e0069, type: 2}
+    waveState: {fileID: 11400000, guid: 661d346d4fe42b142b8d02a4f5af9a6c, type: 2}
+    spawned: 0
+  - waveConstant: {fileID: 11400000, guid: a8a554228b0dd434ca70826ddeffe8c0, type: 2}
+    waveState: {fileID: 11400000, guid: 66d1947d9a56dd741bc2489808d8f044, type: 2}
+    spawned: 0

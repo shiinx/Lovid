@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5305595776794035640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5305595776794035642}
+  - component: {fileID: 5305595776794035641}
+  - component: {fileID: 5305595776794035643}
+  m_Layer: 0
+  m_Name: UpdatedSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5305595776794035642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305595776794035640}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 34.807762, y: 0.9092047, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5305595776794035641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305595776794035640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a716eaeda9b4e45820a4ea9bf32613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locationMapping:
+  - locationName: 0
+    location: {fileID: 0}
+  - locationName: 1
+    location: {fileID: 0}
+  - locationName: 2
+    location: {fileID: 0}
+  - locationName: 3
+    location: {fileID: 0}
+  - locationName: 4
+    location: {fileID: 0}
+  - locationName: 5
+    location: {fileID: 0}
+  - locationName: 6
+    location: {fileID: 0}
+  - locationName: 7
+    location: {fileID: 0}
+  enemySpawnObjectsWaves:
+  - waveEnemies:
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 2
+      delay: 1
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 6
+      delay: 3
+      repeat: 8
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 4
+      delay: 4
+      repeat: 6
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 0
+      delay: 5
+      repeat: 4
+  - waveEnemies:
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 3
+      delay: 1
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 7
+      delay: 3
+      repeat: 8
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 5
+      delay: 4
+      repeat: 6
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 1
+      delay: 5
+      repeat: 4
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 2
+      delay: 25
+      repeat: 1
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 3
+      delay: 25
+      repeat: 1
+  - waveEnemies:
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 3
+      delay: 3
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 2
+      delay: 3
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 0
+      delay: 5
+      repeat: 5
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 1
+      delay: 5
+      repeat: 5
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 6
+      delay: 20
+      repeat: 2
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 5
+      delay: 15
+      repeat: 2
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 4
+      delay: 20
+      repeat: 2
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 7
+      delay: 15
+      repeat: 2
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 4
+      delay: 3
+      repeat: 5
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 5
+      delay: 3
+      repeat: 5
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 2
+      delay: 3
+      repeat: 1
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 3
+      delay: 3
+      repeat: 1
+  - waveEnemies:
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 2
+      delay: 1
+      repeat: 1
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 3
+      delay: 17
+      repeat: 3
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 0
+      delay: 30
+      repeat: 2
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 1
+      delay: 11
+      repeat: 5
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 4
+      delay: 4
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 5
+      delay: 4
+      repeat: 15
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 4
+      delay: 6
+      repeat: 10
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 5
+      delay: 9
+      repeat: 7
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 6
+      delay: 6
+      repeat: 10
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 7
+      delay: 9
+      repeat: 7
+  - waveEnemies:
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 2
+      delay: 1
+      repeat: 1
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 3
+      delay: 17
+      repeat: 3
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 0
+      delay: 30
+      repeat: 2
+    - enemy: {fileID: 3085938248916290235, guid: 5a427cdaa40fe07409bd83415ea43638, type: 3}
+      location: 1
+      delay: 11
+      repeat: 5
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 4
+      delay: 4
+      repeat: 15
+    - enemy: {fileID: 4454918029321861747, guid: 16dd06f8e53d61d42bb6a34884f13a81, type: 3}
+      location: 5
+      delay: 4
+      repeat: 15
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 4
+      delay: 6
+      repeat: 10
+    - enemy: {fileID: 1488830049659064134, guid: a9241b20afdc2a24fbea8ab4fb0b4336, type: 3}
+      location: 5
+      delay: 9
+      repeat: 7
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 6
+      delay: 6
+      repeat: 10
+    - enemy: {fileID: 3479750961010300709, guid: 469e7dced28c08045b35e92039058366, type: 3}
+      location: 7
+      delay: 9
+      repeat: 7
+  currentGameState: {fileID: 11400000, guid: e01b56369fda91f49be60da56e322d8b, type: 2}
+  UIChangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b88a4d4de4ba4264692121074511b589, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  waveNumber: {fileID: 11400000, guid: 080f72589dd1c24478353ac0720a763c, type: 2}
+  enemyLeft: {fileID: 11400000, guid: ffdc892578738ac4797dbdad296a7b5f, type: 2}
+  numberOfWaves: {fileID: 11400000, guid: 2ce25f8d0728f6148a5bf0084ec2b3e6, type: 2}
+  numberOfBossWaves: 0
+  TimeBetweenWaves: 10
+--- !u!114 &5305595776794035643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305595776794035640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e692b65b1f830ba4681047be40e0bf1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 466d99024a0547e48ab3c4d065e4044d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5305595776794035641}
+        m_TargetAssemblyTypeName: MihirTest, Assembly-CSharp
+        m_MethodName: stateChangeResponse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

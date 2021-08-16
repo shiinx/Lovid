@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3720574092778266712}
   - component: {fileID: 3720574092778266727}
   - component: {fileID: 3720574092778266726}
-  m_Layer: 0
+  - component: {fileID: 6637772633830099267}
+  m_Layer: 8
   m_Name: PlatformThin
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -130,3 +131,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &6637772633830099267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3720574092778266725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db9611067eaa64498142b6dd3de96a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfDestroy: 0
+  selfDestroyTime: 180
+  playerConstants: {fileID: 11400000, guid: b655186aa8447ed4cba4ed6cff66375d, type: 2}

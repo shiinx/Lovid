@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random=UnityEngine.Random;
 
 public enum ObjectType {
     freshie = 0,
@@ -15,6 +16,10 @@ public class ObjectPoolItem {
     public GameObject prefab;
     public bool expandPool;
     public ObjectType type;
+    public float spawnStartRangeX;
+    public float spawnEndRangeX;
+    public float spawnStartRangeY;
+    public float spawnEndRangeY;
 }
 
 public class ExistingPoolItem {
@@ -31,15 +36,21 @@ public class ObjectPooler : MonoBehaviour {
     public static ObjectPooler SharedInstance;
     public List<ObjectPoolItem> itemsToPool;
     public List<ExistingPoolItem> pooledObjects;
+    private Vector3 spawnPoint;
 
     private void Awake() {
         SharedInstance = this;
         pooledObjects = new List<ExistingPoolItem>();
         foreach (var item in itemsToPool) {
-            var pickup = Instantiate(item.prefab);
-            pickup.SetActive(false);
-            pickup.transform.parent = transform;
-            pooledObjects.Add(new ExistingPoolItem(pickup, item.type));
+            for (int i = 0; i < item.amount; i++)
+            {
+                spawnPoint = new Vector3(Random.Range(item.spawnStartRangeX, item.spawnEndRangeX), Random.Range(item.spawnStartRangeY,item.spawnEndRangeY), 0);
+                GameObject pickup = (GameObject)Instantiate(item.prefab, spawnPoint, Quaternion.identity);
+                pickup.SetActive(false);
+                pickup.transform.parent = transform;
+                pooledObjects.Add(new ExistingPoolItem(pickup, item.type));
+            }
+            
         }
     }
 
@@ -54,14 +65,20 @@ public class ObjectPooler : MonoBehaviour {
     public GameObject GetPooledObject(ObjectType type) {
         // return inactive pooled object if it matches the type
         for (var i = 0; i < pooledObjects.Count; i++)
+        {
             if (!pooledObjects[i].gameObject.activeInHierarchy && pooledObjects[i].type == type)
+            {
                 return pooledObjects[i].gameObject;
+            }
+                
+        }
+            
         foreach (var item in itemsToPool)
             if (item.type == type)
                 if (item.expandPool) {
                     var pickup = Instantiate(item.prefab);
                     pickup.SetActive(false);
-                    pickup.transform.parent = transform;
+                    pickup.transform.parent = this.transform;
                     pooledObjects.Add(new ExistingPoolItem(pickup, item.type));
                     return pickup;
                 }

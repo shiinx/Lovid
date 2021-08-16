@@ -236,10 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f869d6b81fe6f847870bd766df50114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
-  bossConstants: {fileID: 0}
-  turretConstants: {fileID: 0}
-  playerConstants: {fileID: 0}
+  health: {fileID: 11400000, guid: a2587405b0f0336439e781bd59b2453b, type: 2}
+  bossConstants: {fileID: 11400000, guid: ba7e989ef267c9c47ab4962dc11d7305, type: 2}
+  turretConstants: {fileID: 11400000, guid: c83b4d04cdb785b4ea6c704eddd0542c, type: 2}
+  playerConstants: {fileID: 11400000, guid: b655186aa8447ed4cba4ed6cff66375d, type: 2}
   healthBar: {fileID: 0}
   lineOfSight: 30
   shootingRange: 6

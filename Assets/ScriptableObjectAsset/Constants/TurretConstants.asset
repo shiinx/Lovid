@@ -12,3 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd26593b34dcb840a7587132148c6b4, type: 3}
   m_Name: TurretConstants
   m_EditorClassIdentifier: 
+  attackTurretDamage: 3
+  bulletForce: 100
+  attackTurretHealth: 40
+  attackTurretBuildCost: 15
+  attackTurretDelay: 1
+  attackTurretMarginSpace: 0
+  attackTurretPlacementDelay: 10
+  defenseTurretHealth: 100
+  defenseTurretBuildCost: 7
+  defenseTurretMarginSpace: 0
+  defenseTurretPlacementDelay: 3
+  bombTurretDamage: 8
+  bombTurretBuildCost: 18
+  bombTurretMarginSpace: 0
+  bombTurretPlacementDelay: 8

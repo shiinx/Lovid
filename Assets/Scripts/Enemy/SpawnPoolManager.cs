@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SpawnManagerEV : MonoBehaviour {
+public class SpawnManager : MonoBehaviour {
     public EnemyConstants enemyConstants;
+    public IntVariable buildPhase;
 
     private void Start() {
+        new WaitForSeconds(buildPhase.value);
         Debug.Log("Spawnmanager start");
         for (var j = 0; j < 10; j++)
             spawnFromPooler(ObjectType.freshie);

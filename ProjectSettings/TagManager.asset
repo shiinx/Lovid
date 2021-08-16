@@ -22,6 +22,13 @@ TagManager:
   - AttackTurret
   - DefenseTurret
   - BombTurret
+  - Flag
+  - CheckPoint
+  - EnemyCoin
+  - EPDVariant
+  - ISTDVariant
+  - FreshieVariant
+  - EPDFieldVariant
   layers:
   - Default
   - TransparentFX
@@ -29,19 +36,19 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Player Bullet
+  - Platform
+  - Turret
+  - Turret Bullet
+  - Enemy
+  - Boss
+  - Boss Bullet
+  - Flag
+  - Wall & Ground
+  - Currency
+  - EPDField
+  - postprocessing
   - 
   - 
   - 

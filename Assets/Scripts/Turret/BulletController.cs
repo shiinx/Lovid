@@ -5,18 +5,29 @@ public class BulletController : MonoBehaviour {
     // Start is called before the first frame update
 
     public bool penetrate;
-
-    private void Start() { }
-
-    // Update is called once per frame
-    private void Update() { }
-
-    private void OnBecameInvisible() {
-        Debug.Log("to destroy");
-        Destroy(gameObject);
+    private bool orient = true  ; 
+    private Vector3 previousPos ; 
+    private void Start() {
+        previousPos = this.transform.position ; 
     }
 
-    private void OnTriggerEnter2D() {
+    // Update is called once per frame
+    private void Update() { 
+
+        if (orient) {
+            orient = false ; 
+            var dir = this.transform.position - previousPos; 
+            var angle = Mathf.Atan2(dir.y, dir.x)*Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+    }
+
+    private void OnBecameInvisible() {
+         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
         if (!penetrate) Destroy(gameObject);
     }
 }

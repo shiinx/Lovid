@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c0bf39ff234c33b69515986c0b1b42, type: 3}
   m_Name: ISTDHealth
   m_EditorClassIdentifier: 
-  value: 0
+  value: -2

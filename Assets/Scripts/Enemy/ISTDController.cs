@@ -1,83 +1,95 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class ISTDController : MonoBehaviour, EnemyInterface {
-    public EnemyConstants enemyConstants;
-    public PlayerConstants playerConstants;
-    public TurretConstants turretConstants;
-    public PathVariable istdPath;
-    public UnityEvent onEnemyTakeDamage;
-    public UnityEvent onEnemyDeath;
-    public FloatVariable istdHealth;
+using UnityEngine.AI;
 
-    private float pathY;
-    private Rigidbody2D enemyBody;
-    private Vector2 istdVelocity;
+public class ISTDController : MonoBehaviour, EnemyInterface {
+    public bool variant = false;
+    public ObjectPointer flagPointer;
+    public EnemyConstants enemyConstants;
+    public PlayerVariable playerVariable;
+    public TurretConstants turretConstants;
+    public GameObject coin;
+
+    public UnityEvent onEnemyDeath;
+
+    //public FloatVariable istdHealth;
+    private float health;
+    NavMeshAgent iagent;
+
+    private bool _isDead;
 
     // Start is called before the first frame update
     private void Start() {
-        istdHealth.Value = enemyConstants.istdHealth;
-        enemyBody = GetComponent<Rigidbody2D>();
+        iagent = GetComponent<NavMeshAgent>();
+        iagent.updateRotation = false;
+        iagent.updateUpAxis = false;
+        if (!variant) {
+            health = enemyConstants.istdHealth;
+        } else {
+            // increase  or decrease here iagent speed if required 
+            health = enemyConstants.istdVariantHelath;
+        }
+        _isDead = false;
     }
 
     // Update is called once per frame
     private void Update() {
-        //compute velocity using floatvariables, enemyconstants
-        //move the enemybody accordingly
-        MoveEnemy();
-    }
-    public void ComputeVelocity()
-    {
-        //retrieve values from pathvariables
-        //say moving according to a math function, y = mx+c
-        //if istdPath.pathType is linear, istdVelocity = new Vector(x, m)
-        // if sine (y=sinx), y = sin(x); istdVelocity = new Vector(stepvalue, y); x += stepvalue
-        //x += stepvalue
-        if (istdPath.pathType == EnemyConstants.PathType.linear)
-        {
-            istdVelocity = new Vector2(istdPath.xStepValue, istdPath.yTransform);
+        iagent.destination = flagPointer.flagTransform.position; //waypoint.transform.position;
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+        if (iagent.velocity.x < 0 && !variant) {
+            transform.localScale = new Vector3(-0.4f, 0.4f, 1);
+        } else if (iagent.velocity.x > 0 && !variant){
+            transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        } else if (iagent.velocity.x < 0 && variant) {
+            transform.localScale = new Vector3(-0.6f, 0.6f, 1);
+        } else if (iagent.velocity.x > 0 && variant) {
+            transform.localScale = new Vector3(0.6f, 0.6f, 1);
         }
-        if (istdPath.pathType == EnemyConstants.PathType.sine)
-        {
-            pathY = istdPath.yTransform * Mathf.Sin(istdPath.xTransform);
-            istdVelocity = new Vector2(istdPath.xStepValue, pathY);
-            istdPath.XTransform += istdPath.xStepValue;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("PlayerBullet")) {
+            Destroy(other.gameObject);
+            TakeBulletDamage();
+        }
+
+        if (other.gameObject.CompareTag("TurretBullet")) {
+            Destroy(other.gameObject);
+            TakeTurretDamage();
+        }
+
+        if (other.gameObject.CompareTag("BombTurret")) {
+            TakeClaymoreDamage();
         }
         
-    }
-    public void MoveEnemy()
-    {
-        //compute velocity
-        ComputeVelocity();
-        enemyBody.MovePosition(enemyBody.position + istdVelocity*Time.fixedDeltaTime);
-    }
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "Bullet") TakeBulletDamage();
-        if (other.gameObject.tag == "TurretBullet") TakeTurretDamage();
-        if (other.gameObject.tag == "Claymore") TakeClaymoreDamage();
-        if(enemyConstants.istdHealth <= 0)
-        {
-            KillSelf();
+        if (health <= 0 && !_isDead) {
+            _isDead = true;
             onEnemyDeath.Invoke();
+            KillSelf();
         }
     }
-    public void TakeBulletDamage()
-    {
-        istdHealth.Value -= playerConstants.rangeDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeBulletDamage() {
+        health -= playerVariable.PlayerRangeDamage;
     }
-    public void TakeTurretDamage()
-    {
-        istdHealth.Value -= turretConstants.attackTurretDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeTurretDamage() {
+        health -= turretConstants.attackTurretDamage;
     }
-    public void TakeClaymoreDamage()
-    {
-        istdHealth.Value -= turretConstants.bombTurretDamage;
-        onEnemyTakeDamage.Invoke();
+
+    public void TakeClaymoreDamage() {
+        health -= turretConstants.bombTurretDamage;
     }
-    public void KillSelf()
-    {
-        this.gameObject.SetActive(false);
-        Debug.Log("Enemy returned to pool");
+
+    public void KillSelf() {
+        float n = variant ? enemyConstants.istdVairantCurrencyValue : enemyConstants.istdCurrencyValue;
+        
+        for (int i = 0; i < (int) n; i++) {
+            Instantiate(coin, this.transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 }
